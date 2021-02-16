@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TallerAndroid- Luz Lucumí Hernández</string>
+    <string name="btnClick">En línea</string>
+    <string name="btnInterface">Interfaz</string>
+    <string name="btnDelegate">Delegar</string>
+    <string name="btnIniciar">Iniciar</string>
+</resources>

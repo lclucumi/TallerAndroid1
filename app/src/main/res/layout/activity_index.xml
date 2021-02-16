@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Index">
+
+    <EditText
+        android:id="@+id/etData"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:ems="20"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX=""
+        tools:layout_editor_absoluteY="" />
+
+    <RadioGroup
+        android:id="@+id/grupoRadio"
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="89dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:text="Estas son algunas actividades, pero si prefieres entretenerte con otras cosas, puedes continuar explorando la página."
+            android:textSize="8pt" />
+
+        <RadioButton
+            android:id="@+id/rbtnContar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contar" />
+
+        <RadioButton
+            android:id="@+id/rbtnColorear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Colorear" />
+
+        <RadioButton
+            android:id="@+id/rbtnActividades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Todas las actividades" />
+
+        <EditText
+            android:id="@+id/etCount"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:ems="10"
+            android:hint="Valor"
+            android:inputType="textPersonName"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="289dp" />
+
+        <Button
+            android:id="@+id/btnContar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="contar"
+            android:text="Contar"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="479dp" />
+
+        <Button
+            android:id="@+id/btnColorear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="colorear"
+            android:text="Colorear"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="479dp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnExplorar"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="explorar"
+        android:text="Explorar página"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="479dp" />
+
+    <Button
+        android:id="@+id/btnVolverInicio"
+
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="volver"
+        android:text="Volver a login"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="479dp" />
+
+</LinearLayout>
