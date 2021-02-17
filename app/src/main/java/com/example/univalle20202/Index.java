@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,8 +52,7 @@ public class Index extends AppCompatActivity {
         rbtnActividades=findViewById(R.id.rbtnActividades);
 
         Bundle dataReceive = getIntent().getExtras();
-        edData.setText("Bienvenida "+dataReceive.getString("userName")+" "+
-                dataReceive.getString("passwd"));
+        edData.setText("Bienvenid@ "+dataReceive.getString("userName")+" "+ dataReceive.getString("passwd"));
 
         //Se indica que inicialmente no esté seleccionado ningún RadioButton
         grupoRadio.clearCheck();
@@ -82,7 +84,12 @@ public class Index extends AppCompatActivity {
     }
 
     public void explorar(View l){
+        Bundle data = new Bundle();
+        Bundle dataReceive = getIntent().getExtras();
         Intent ir = new Intent(this,ListaImagenes.class);
+        data.putString("userName", dataReceive.getString("userName"));
+        data.putString("passwd",dataReceive.getString("passwd"));
+        ir.putExtras(data);
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(ir);
     }
@@ -165,6 +172,37 @@ public class Index extends AppCompatActivity {
 
         public int aleatorio(){
             return (int) (Math.random()*255) + 1;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.index_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        Bundle data = new Bundle();
+        Bundle dataReceive = getIntent().getExtras();
+        switch (item.getItemId()) {
+            case R.id.menuCerrarSesion:
+                Intent irLogin = new Intent(getApplicationContext(), Login.class);
+                irLogin.addFlags(irLogin.FLAG_ACTIVITY_CLEAR_TOP | irLogin.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(irLogin);
+                return true;
+            case R.id.menuExplorarPagina:
+                Intent irListaImagenes = new Intent(this, ListaImagenes.class);
+                irListaImagenes.addFlags(irListaImagenes.FLAG_ACTIVITY_CLEAR_TOP | irListaImagenes.FLAG_ACTIVITY_CLEAR_TASK);
+                data.putString("userName", dataReceive.getString("userName"));
+                data.putString("passwd",dataReceive.getString("passwd"));
+                irListaImagenes.putExtras(data);
+                startActivity(irListaImagenes);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

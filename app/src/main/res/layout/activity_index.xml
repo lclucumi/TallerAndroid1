@@ -2,37 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Index">
 
-    <EditText
-        android:id="@+id/etData"
-        android:layout_width="309dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2px"
-        android:ems="20"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX=""
-        tools:layout_editor_absoluteY="" />
+
+
 
     <RadioGroup
         android:id="@+id/grupoRadio"
         android:layout_width="match_parent"
-        android:layout_height="480dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp">
+
+        <EditText
+            android:id="@+id/etData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ems="20"
+            android:inputType="textPersonName"
+            android:text="Name"
+            tools:layout_editor_absoluteX=""
+            tools:layout_editor_absoluteY="" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Estas son algunas actividades, pero si prefieres entretenerte con otras cosas, puedes continuar explorando la página."
+                android:textSize="7pt" />
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewActividades"
             android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:text="Estas son algunas actividades, pero si prefieres entretenerte con otras cosas, puedes continuar explorando la página."
-            android:textSize="8pt" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Actividades"
+            android:textSize="12pt" />
 
         <RadioButton
             android:id="@+id/rbtnContar"
@@ -58,55 +76,30 @@
             android:layout_height="95dp"
             android:ems="10"
             android:hint="Valor"
-            android:inputType="textPersonName"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="64dp"
-            tools:layout_editor_absoluteY="289dp" />
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/btnContar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="contar"
-            android:text="Contar"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="479dp" />
+            android:text="Contar"/>
 
         <Button
             android:id="@+id/btnColorear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="colorear"
-            android:text="Colorear"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="479dp" />
+            android:text="Colorear"/>
     </RadioGroup>
 
     <Button
         android:id="@+id/btnExplorar"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:onClick="explorar"
-        android:text="Explorar página"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="479dp" />
-
-    <Button
-        android:id="@+id/btnVolverInicio"
-
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:onClick="volver"
-        android:text="Volver a login"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="479dp" />
+        android:text="@string/explorar_aplicacion"/>
 
 </LinearLayout>

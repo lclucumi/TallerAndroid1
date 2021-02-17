@@ -18,7 +18,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().hide();
         //Lanzamiento
         btnIniciar=findViewById(R.id.btnIniciar);
         etUserName=findViewById(R.id.etUserName);
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Bundle data = new Bundle();
 
         //Validación de campos usuario y contraseña
-        if(etUserName.getText().toString().equals("Luz") && etPasswd.getText().toString().equals("Carime")) {
+        if(etUserName.getText().toString().equals("") && etPasswd.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(),"Redireccionando...",Toast.LENGTH_SHORT).show();
             data.putString("userName",etUserName.getText().toString());
             data.putString("passwd",etPasswd.getText().toString());

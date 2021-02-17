@@ -8,6 +8,23 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/WelcomeMessage"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="@string/LoginMessage"
+        android:textColor="@color/teal_700"
+        android:textSize="25sp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="600px"
@@ -17,22 +34,28 @@
 
     <EditText
         android:id="@+id/etUserName"
-        android:layout_width="682px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:hint="Usuario"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etPasswd"
-        android:layout_width="682px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:hint="Contraseña"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnIniciar"
-        android:layout_width="760px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:text="Iniciar Sesión"
         android:visibility="visible"
         tools:ignore="MissingConstraints" />

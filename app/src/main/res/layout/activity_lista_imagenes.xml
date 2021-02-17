@@ -9,14 +9,6 @@
     tools:context=".ListaImagenes">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="133dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Multimedia"
-        android:textSize="60px" />
-
-    <TextView
         android:id="@+id/textView3"
         android:layout_width="364dp"
         android:layout_height="wrap_content"
@@ -125,15 +117,14 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:onClick="trayectoria"
-        android:text="SIGUIENTE" />
+        android:text="VIDEOS" />
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="344dp"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.univalle20202.LogoutFragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:onClick="volver"
-        android:text="Volver a Actividades" />
+        android:layout_marginTop="10dp"/>
+
 
 </LinearLayout>
