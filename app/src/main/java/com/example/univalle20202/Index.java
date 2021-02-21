@@ -52,7 +52,7 @@ public class Index extends AppCompatActivity {
         rbtnActividades=findViewById(R.id.rbtnActividades);
 
         Bundle dataReceive = getIntent().getExtras();
-        edData.setText("Bienvenid@ "+dataReceive.getString("userName")+" "+ dataReceive.getString("passwd"));
+        edData.setText("Bienvenid@ "+ dataReceive.getString("userName"));
 
         //Se indica que inicialmente no esté seleccionado ningún RadioButton
         grupoRadio.clearCheck();

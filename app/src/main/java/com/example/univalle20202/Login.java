@@ -9,10 +9,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button btnIniciar;
     EditText etUserName, etPasswd;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +45,48 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         Intent ir= new Intent(this, Index.class);
         Bundle data = new Bundle();
 
-        //Validación de campos usuario y contraseña
-        if(etUserName.getText().toString().equals("") && etPasswd.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(),"Redireccionando...",Toast.LENGTH_SHORT).show();
-            data.putString("userName",etUserName.getText().toString());
-            data.putString("passwd",etPasswd.getText().toString());
-            ir.putExtras(data);
-            ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(ir);
-        }
-        //Usuario incorrecto
-        else if(etUserName.getText().toString()!="Luz" && etPasswd.getText().toString().equals("Carime")){
-            Toast.makeText(getApplicationContext(), "Usuario incorrecto",Toast.LENGTH_SHORT).show();
-        }
-        //Contraseña incorrecta
-        else if(etUserName.getText().toString().equals("Luz") && etPasswd.getText().toString()!="admin123"){
-            Toast.makeText(getApplicationContext(), "Contraseña incorrecta",Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(getApplicationContext(), "Verifica los datos por favor",Toast.LENGTH_SHORT).show();
-        }
-        data.putString("userName",etUserName.getText().toString());
-        data.putString("passwd",etPasswd.getText().toString());
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="https://run.mocky.io/v3/1aaf3907-9707-4ddf-94d5-dc1d24afb383";
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest stringRequest = new JsonObjectRequest (url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("users");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject user = jsonArray.getJSONObject(i);
+                                String userName = user.getString("usernamer");
+                                int password = user.getInt("passwd");
+
+                                if(etUserName.getText().toString().equals(userName) && etPasswd.getText().toString().equals(String.valueOf(password))){
+
+                                    Toast.makeText(getApplicationContext(),"Redireccionando...",Toast.LENGTH_SHORT).show();
+                                    data.putString("userName",etUserName.getText().toString());
+                                    data.putString("passwd",etPasswd.getText().toString());
+                                    ir.putExtras(data);
+                                    ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(ir);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                etUserName.setText("That didn't work!");
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }
