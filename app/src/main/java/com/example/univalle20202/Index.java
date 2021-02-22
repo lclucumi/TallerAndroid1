@@ -16,6 +16,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.IntentFilter;
+
+import com.example.univalle20202.R;
+import com.example.univalle20202.databinding.ActivityLoginBinding;
+import com.example.univalle20202.services.CheckConection;
+
 public class Index extends AppCompatActivity {
 
     EditText edData,etCount;
@@ -25,11 +35,24 @@ public class Index extends AppCompatActivity {
     int contador=0;
     Colorear objColorear;
 
+    protected ActivityLoginBinding binding;
+    public static final String BroadcastStringForAction = "checkinternet";
+    protected IntentFilter mIntentFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
 
+        startService(new Intent(this, CheckConection.class));
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(BroadcastStringForAction);
+
+        Intent i = new Intent(getApplicationContext(), CheckConection.class);
+        startService(i);
+
+        setContentView(R.layout.activity_index);
         //Lanzamiento
         //editText
         edData= findViewById(R.id.etData);
@@ -204,5 +227,43 @@ public class Index extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(BroadcastStringForAction)) {
+                if (!intent.getStringExtra("online_status").equals("true")) {
+
+                    ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                    ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+
+                    if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        startActivity(new Intent(context, Login.class));
+                    }
+                    else{
+                        startActivity(new Intent(context, Index.class));
+                    }
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(myReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(myReceiver, mIntentFilter);
     }
 }

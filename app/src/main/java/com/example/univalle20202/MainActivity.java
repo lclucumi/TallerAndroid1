@@ -18,7 +18,24 @@ import android.widget.VideoView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.IntentFilter;
+import com.example.univalle20202.R;
+import android.os.Bundle;
+
+import com.example.univalle20202.databinding.ActivityLoginBinding;
+import com.example.univalle20202.services.CheckConection;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    protected ActivityLoginBinding binding;
+
+    public static final String BroadcastStringForAction = "checkinternet";
+
+    protected IntentFilter mIntentFilter;
 
     Button btnPlay,btnPause,btnStop,btnSalir,btnVolverAScroll;
     VideoView video;
@@ -29,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, CheckConection.class));
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(BroadcastStringForAction);
+
+        Intent i = new Intent(getApplicationContext(), CheckConection.class);
+        startService(i);
+
         setContentView(R.layout.activity_main);
 
         //Inicialización de la clase VideoView
@@ -121,5 +147,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(BroadcastStringForAction)) {
+                if (!intent.getStringExtra("online_status").equals("true")) {
+
+                    ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                    ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+
+                    if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        startActivity(new Intent(context, Login.class));
+                    }
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(myReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(myReceiver, mIntentFilter);
     }
 }

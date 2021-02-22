@@ -22,18 +22,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.univalle20202.R;
+import com.example.univalle20202.databinding.ActivityLoginBinding;
+import com.example.univalle20202.services.CheckConection;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button btnIniciar;
     EditText etUserName, etPasswd;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
         //Lanzamiento
         btnIniciar=findViewById(R.id.btnIniciar);
         etUserName=findViewById(R.id.etUserName);
