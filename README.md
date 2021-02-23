@@ -12,7 +12,7 @@
 ![](GIFMocky.gif)
 
 ### ConectyManager y NerworkInfo para redireccionar en caso de conectividad nula
-![](GIFNetworkinfo.gif)
+![](GIFNetworkInfo.gif)
 
 ### Autentificación por API de Google
 ![](GIFGoogleLogin.gif)
