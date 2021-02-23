@@ -6,7 +6,7 @@
 - Luis Eduardo Albarán Vélez (@luisalvaran17)
 
 ### Navegabilidad por los tres componentes
-![]GIF1.mp4
+![](GIF1.mp4)
 
 ### Inicio de sesión por medio de consulta de un recurso Api Rest
 
