@@ -25,6 +25,14 @@ import android.widget.Toast;
 
 import com.example.univalle20202.databinding.ActivityLoginBinding;
 import com.example.univalle20202.services.OnlineConnection;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 
 public class Index extends AppCompatActivity {
 
@@ -34,6 +42,9 @@ public class Index extends AppCompatActivity {
     RadioButton rbtnContar,rbtnColorear,rbtnActividades;
     int contador=0;
     Colorear objColorear;
+
+    //Google
+    GoogleApiClient googleApiClient;
 
     protected ActivityLoginBinding binding;
     public static final String BroadcastStringForAction = "checkinternet";

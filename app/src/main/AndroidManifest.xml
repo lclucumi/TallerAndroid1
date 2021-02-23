@@ -12,14 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Univalle20202">
+        <activity android:name=".try1"></activity>
         <activity
             android:name=".ImagesList"
-            android:label="@string/Memes"
-            />
+            android:label="@string/Memes" />
+
         <service
             android:name=".services.OnlineConnection"
             android:enabled="true"
             android:exported="true" />
+
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,10 +31,10 @@
         </activity>
         <activity
             android:name=".Index"
-            android:label="@string/name_index"/>
+            android:label="@string/name_index" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/Multimedia"/>
+            android:label="@string/Multimedia" />
     </application>
 
 </manifest>

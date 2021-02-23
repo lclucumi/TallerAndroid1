@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "338951669350",
+    "project_id": "taller2android-6fe18",
+    "storage_bucket": "taller2android-6fe18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338951669350:android:7e130945889008f0008fa7",
+        "android_client_info": {
+          "package_name": "com.example.univalle20202"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338951669350-dqa87g1saqhnt6i3u4l4382laarkmqge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.univalle20202",
+            "certificate_hash": "cfe585eb0f2550d0a81273d62443a56efd7d8bd7"
+          }
+        },
+        {
+          "client_id": "338951669350-a4l189f1elnt3piukteqchpvfe4296vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsKZjrk2o5FHJur3h9VhZNrRx3wIpfNZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338951669350-a4l189f1elnt3piukteqchpvfe4296vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
