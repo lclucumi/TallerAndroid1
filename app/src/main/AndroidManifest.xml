@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Univalle20202">
         <activity
-            android:name=".ListaImagenes"
+            android:name=".ImagesList"
             android:label="@string/Memes"
             />
         <service
-            android:name=".services.CheckConection"
+            android:name=".services.OnlineConnection"
             android:enabled="true"
             android:exported="true" />
         <activity android:name=".Login">

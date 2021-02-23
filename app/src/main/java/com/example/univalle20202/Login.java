@@ -2,38 +2,51 @@ package com.example.univalle20202;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.univalle20202.databinding.ActivityLoginBinding;
+import com.example.univalle20202.services.OnlineConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.example.univalle20202.R;
-import com.example.univalle20202.databinding.ActivityLoginBinding;
-import com.example.univalle20202.services.CheckConection;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button btnIniciar;
     EditText etUserName, etPasswd;
 
+    protected ActivityLoginBinding binding;
+    public static final String BroadcastStringForAction = "checkinternet";
+    protected IntentFilter mIntentFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        startService(new Intent(this, OnlineConnection.class));
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(BroadcastStringForAction);
+
+        Intent i = new Intent(getApplicationContext(), OnlineConnection.class);
+        startService(i);
 
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
@@ -92,5 +105,41 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(BroadcastStringForAction)) {
+                if (!intent.getStringExtra("online_status").equals("true")) {
+
+                    ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                    ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+
+                    if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        Toast.makeText(getApplicationContext(), "No tienes conexión",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(context, Login.class));
+                    }
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        registerReceiver(myReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(myReceiver, mIntentFilter);
     }
 }

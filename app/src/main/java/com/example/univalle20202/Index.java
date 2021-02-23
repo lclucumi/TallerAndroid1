@@ -21,10 +21,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.widget.Toast;
 
-import com.example.univalle20202.R;
 import com.example.univalle20202.databinding.ActivityLoginBinding;
-import com.example.univalle20202.services.CheckConection;
+import com.example.univalle20202.services.OnlineConnection;
 
 public class Index extends AppCompatActivity {
 
@@ -43,13 +43,13 @@ public class Index extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startService(new Intent(this, CheckConection.class));
+        startService(new Intent(this, OnlineConnection.class));
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BroadcastStringForAction);
 
-        Intent i = new Intent(getApplicationContext(), CheckConection.class);
+        Intent i = new Intent(getApplicationContext(), OnlineConnection.class);
         startService(i);
 
         setContentView(R.layout.activity_index);
@@ -109,7 +109,7 @@ public class Index extends AppCompatActivity {
     public void explorar(View l){
         Bundle data = new Bundle();
         Bundle dataReceive = getIntent().getExtras();
-        Intent ir = new Intent(this,ListaImagenes.class);
+        Intent ir = new Intent(this, ImagesList.class);
         data.putString("userName", dataReceive.getString("userName"));
         data.putString("passwd",dataReceive.getString("passwd"));
         ir.putExtras(data);
@@ -217,7 +217,7 @@ public class Index extends AppCompatActivity {
                 startActivity(irLogin);
                 return true;
             case R.id.menuExplorarPagina:
-                Intent irListaImagenes = new Intent(this, ListaImagenes.class);
+                Intent irListaImagenes = new Intent(this, ImagesList.class);
                 irListaImagenes.addFlags(irListaImagenes.FLAG_ACTIVITY_CLEAR_TOP | irListaImagenes.FLAG_ACTIVITY_CLEAR_TASK);
                 data.putString("userName", dataReceive.getString("userName"));
                 data.putString("passwd",dataReceive.getString("passwd"));
@@ -239,6 +239,7 @@ public class Index extends AppCompatActivity {
                     ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
 
                     if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        Toast.makeText(getApplicationContext(), "No tienes conexión",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(context, Login.class));
                     }
                     else{

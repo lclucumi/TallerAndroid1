@@ -16,12 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.example.univalle20202.R;
-import com.example.univalle20202.services.CheckConection;
+
+import com.example.univalle20202.services.OnlineConnection;
 
 import com.example.univalle20202.databinding.ActivityLoginBinding;
 
-public class ListaImagenes extends AppCompatActivity {
+public class ImagesList extends AppCompatActivity {
 
     Button btnTrayectoria,btnVolver;
     String username, password;
@@ -34,13 +34,13 @@ public class ListaImagenes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startService(new Intent(this, CheckConection.class));
+        startService(new Intent(this, OnlineConnection.class));
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BroadcastStringForAction);
 
-        Intent i = new Intent(getApplicationContext(), CheckConection.class);
+        Intent i = new Intent(getApplicationContext(), OnlineConnection.class);
         startService(i);
 
         setContentView(R.layout.activity_lista_imagenes);
@@ -117,6 +117,7 @@ public class ListaImagenes extends AppCompatActivity {
                     ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
 
                     if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        Toast.makeText(getApplicationContext(), "No tienes conexión",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(context, Login.class));
                     }
                 }

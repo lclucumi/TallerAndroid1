@@ -11,11 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.app.ActivityManager;
@@ -23,11 +21,9 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
-import com.example.univalle20202.R;
-import android.os.Bundle;
 
 import com.example.univalle20202.databinding.ActivityLoginBinding;
-import com.example.univalle20202.services.CheckConection;
+import com.example.univalle20202.services.OnlineConnection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startService(new Intent(this, CheckConection.class));
+        startService(new Intent(this, OnlineConnection.class));
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BroadcastStringForAction);
 
-        Intent i = new Intent(getApplicationContext(), CheckConection.class);
+        Intent i = new Intent(getApplicationContext(), OnlineConnection.class);
         startService(i);
 
         setContentView(R.layout.activity_main);
@@ -86,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void volver(View l){
-        Intent ir = new Intent(this,ListaImagenes.class);
+        Intent ir = new Intent(this, ImagesList.class);
         ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(ir);
     }
@@ -126,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(irLogin);
                 return true;
             case R.id.menuVolver:
-                Intent irListaImagenes = new Intent(getApplicationContext(), ListaImagenes.class);
+                Intent irListaImagenes = new Intent(getApplicationContext(), ImagesList.class);
                 irListaImagenes.addFlags(irListaImagenes.FLAG_ACTIVITY_CLEAR_TOP | irListaImagenes.FLAG_ACTIVITY_CLEAR_TASK);
                 data.putString("userName",username);
                 data.putString("passwd", password);
@@ -159,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
 
                     if (!("class " + cn.getClassName()).equals(Login.class.toString())) {
+                        Toast.makeText(getApplicationContext(), "No tienes conexión",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(context, Login.class));
                     }
                 }
