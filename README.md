@@ -1,6 +1,6 @@
-**Taller 2 Android**
+## Taller 2 Android
 
-**Integrantes del grupo**
+### Integrantes del grupo
 - Luz Carime Lucumí Hernández (@lclucumi)
 - Javier Alexis Orozco Manzano (@AlexisOrozcoM)
 - Luis Eduardo Albarán Vélez (@luisalvaran17)
