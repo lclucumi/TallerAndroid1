@@ -119,13 +119,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
                                 try {
                                     JSONArray jsonArray = response.getJSONArray("users");
+                                     boolean exists = false;
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject user = jsonArray.getJSONObject(i);
                                         String userName = user.getString("usernamer");
                                         int password = user.getInt("passwd");
 
-                                        if(etUserName.getText().toString().equals(userName) && etPasswd.getText().toString().equals(String.valueOf(password))){
 
+                                         if(etUserName.getText().toString().equals(userName) && etPasswd.getText().toString().equals(String.valueOf(password))){
+                                            exists = true;
                                             Toast.makeText(getApplicationContext(),"Redireccionando...",Toast.LENGTH_SHORT).show();
                                             data.putString("userName",etUserName.getText().toString());
                                             data.putString("passwd",etPasswd.getText().toString());
@@ -133,11 +135,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                                             ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(ir);
                                         }
-                                        else if (i==jsonArray.length()-1 && !etUserName.getText().toString().equals(userName) && !etPasswd.getText().toString().equals(String.valueOf(password))){
-                                            Toast.makeText(getApplicationContext(),"Usuario no registrado.",Toast.LENGTH_SHORT).show();
-                                        }
-
                                     }
+                                    if(!exists){
+                                        Toast.makeText(getApplicationContext(),"Usuario no registrado.",Toast.LENGTH_SHORT).show();
+                                   }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
