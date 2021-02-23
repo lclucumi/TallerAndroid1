@@ -50,7 +50,7 @@ public class ImagesList extends AppCompatActivity {
         Bundle dataReceive = getIntent().getExtras();
         username = dataReceive.getString("userName");
         password = dataReceive.getString("passwd");
-        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+
     }
 
     public void trayectoria(View l){

@@ -133,6 +133,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                                             ir.addFlags(ir.FLAG_ACTIVITY_CLEAR_TOP | ir.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(ir);
                                         }
+                                        else if (i==jsonArray.length()-1 && !etUserName.getText().toString().equals(userName) && !etPasswd.getText().toString().equals(String.valueOf(password))){
+                                            Toast.makeText(getApplicationContext(),"Usuario no registrado.",Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
